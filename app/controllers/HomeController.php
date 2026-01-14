@@ -4,8 +4,12 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $productModel = new Product();
+        $products = $productModel->getHighlighted();
+
+
         $this->view('home/index', [
-            'title' => 'Home'
+            'products' => $products
         ]);
     }
 }

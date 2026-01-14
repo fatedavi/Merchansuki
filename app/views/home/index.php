@@ -177,160 +177,78 @@
     </div>
 </section>
 
-    <!-- Product Section -->
-    <section class="py-12 sm:py-16 lg:py-20 xl:py-24 bg-gradient-to-b from-transparent to-indigo-950/50">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-10 lg:mb-12 gap-4">
-                <div>
-                    <h2 class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 sm:mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Featured Collection
-                    </h2>
-                    <p class="text-purple-200 text-xs sm:text-sm lg:text-base">Koleksi Terbaru & Paling Laris</p>
-                </div>
-                <button class="text-purple-300 hover:text-white font-semibold flex items-center gap-2 transition-colors text-sm lg:text-base">
-                    Lihat Semua <i class="fas fa-arrow-right text-xs"></i>
-                </button>
-            </div>
+   <!-- Product Section -->
+<section class="py-12 sm:py-16 lg:py-20 xl:py-24 bg-gradient-to-b from-transparent to-indigo-950/50">
+    <div class="container mx-auto px-4">
 
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-                <!-- Product 1 -->
-                <div class="product-card glass-effect rounded-xl lg:rounded-2xl overflow-hidden group">
-                    <div class="relative overflow-hidden">
-                        <div class="absolute top-2 right-2 lg:top-3 lg:right-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-2 py-1 lg:px-3 rounded-full text-[10px] lg:text-xs font-bold badge-pulse z-10">
-                            LIMITED
-                        </div>
-                        <div class="w-full h-40 sm:h-48 lg:h-64 bg-pink-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                            <i class="fas fa-image text-4xl sm:text-5xl lg:text-6xl text-pink-400/50"></i>
-                        </div>
-                    </div>
-                    <div class="p-3 sm:p-4 lg:p-5">
-                        <h3 class="text-sm sm:text-base lg:text-xl font-bold mb-1 lg:mb-2 line-clamp-1">Sakura Dream</h3>
-                        <p class="text-purple-300 text-[10px] sm:text-xs lg:text-sm mb-2 lg:mb-3 line-clamp-1">160x50cm • Peach Skin</p>
-                        <div class="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4">
-                            <span class="text-base sm:text-lg lg:text-2xl font-bold text-pink-400">Rp 450K</span>
-                            <div class="flex items-center gap-1 text-yellow-400 text-[10px] sm:text-xs">
-                                <i class="fas fa-star"></i>
-                                <span class="font-semibold">4.9</span>
-                            </div>
-                        </div>
-                        <button class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 py-2 lg:py-3 rounded-lg lg:rounded-xl font-semibold text-xs sm:text-sm transition-all duration-300 glow-effect">
-                            <i class="fas fa-cart-plus mr-1 lg:mr-2"></i>Add to Cart
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="product-card glass-effect rounded-xl lg:rounded-2xl overflow-hidden group">
-                    <div class="relative overflow-hidden">
-                        <div class="absolute top-2 right-2 lg:top-3 lg:right-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-2 py-1 lg:px-3 rounded-full text-[10px] lg:text-xs font-bold badge-pulse z-10">
-                            NEW
-                        </div>
-                        <div class="w-full h-40 sm:h-48 lg:h-64 bg-purple-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                            <i class="fas fa-image text-4xl sm:text-5xl lg:text-6xl text-purple-400/50"></i>
-                        </div>
-                    </div>
-                    <div class="p-3 sm:p-4 lg:p-5">
-                        <h3 class="text-sm sm:text-base lg:text-xl font-bold mb-1 lg:mb-2 line-clamp-1">Moonlight Princess</h3>
-                        <p class="text-purple-300 text-[10px] sm:text-xs lg:text-sm mb-2 lg:mb-3 line-clamp-1">160x50cm • Velvet</p>
-                        <div class="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4">
-                            <span class="text-base sm:text-lg lg:text-2xl font-bold text-purple-400">Rp 525K</span>
-                            <div class="flex items-center gap-1 text-yellow-400 text-[10px] sm:text-xs">
-                                <i class="fas fa-star"></i>
-                                <span class="font-semibold">4.8</span>
-                            </div>
-                        </div>
-                        <button class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 py-2 lg:py-3 rounded-lg lg:rounded-xl font-semibold text-xs sm:text-sm transition-all duration-300 glow-effect">
-                            <i class="fas fa-cart-plus mr-1 lg:mr-2"></i>Add to Cart
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-card glass-effect rounded-xl lg:rounded-2xl overflow-hidden group">
-                    <div class="relative overflow-hidden">
-                        <div class="absolute top-2 right-2 lg:top-3 lg:right-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-1 lg:px-3 rounded-full text-[10px] lg:text-xs font-bold badge-pulse z-10">
-                            BEST
-                        </div>
-                        <div class="w-full h-40 sm:h-48 lg:h-64 bg-yellow-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                            <i class="fas fa-image text-4xl sm:text-5xl lg:text-6xl text-yellow-400/50"></i>
-                        </div>
-                    </div>
-                    <div class="p-3 sm:p-4 lg:p-5">
-                        <h3 class="text-sm sm:text-base lg:text-xl font-bold mb-1 lg:mb-2 line-clamp-1">Sunrise Melody</h3>
-                        <p class="text-purple-300 text-[10px] sm:text-xs lg:text-sm mb-2 lg:mb-3 line-clamp-1">160x50cm • 2-Way Tricot</p>
-                        <div class="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4">
-                            <span class="text-base sm:text-lg lg:text-2xl font-bold text-yellow-400">Rp 480K</span>
-                            <div class="flex items-center gap-1 text-yellow-400 text-[10px] sm:text-xs">
-                                <i class="fas fa-star"></i>
-                                <span class="font-semibold">5.0</span>
-                            </div>
-                        </div>
-                        <button class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 py-2 lg:py-3 rounded-lg lg:rounded-xl font-semibold text-xs sm:text-sm transition-all duration-300 glow-effect">
-                            <i class="fas fa-cart-plus mr-1 lg:mr-2"></i>Add to Cart
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card glass-effect rounded-xl lg:rounded-2xl overflow-hidden group">
-                    <div class="relative overflow-hidden">
-                        <div class="absolute top-2 right-2 lg:top-3 lg:right-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-2 py-1 lg:px-3 rounded-full text-[10px] lg:text-xs font-bold badge-pulse z-10">
-                            PRE-ORDER
-                        </div>
-                        <div class="w-full h-40 sm:h-48 lg:h-64 bg-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                            <i class="fas fa-image text-4xl sm:text-5xl lg:text-6xl text-blue-400/50"></i>
-                        </div>
-                    </div>
-                    <div class="p-3 sm:p-4 lg:p-5">
-                        <h3 class="text-sm sm:text-base lg:text-xl font-bold mb-1 lg:mb-2 line-clamp-1">Azure Fantasy</h3>
-                        <p class="text-purple-300 text-[10px] sm:text-xs lg:text-sm mb-2 lg:mb-3 line-clamp-1">160x50cm • Peach Skin</p>
-                        <div class="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4">
-                            <span class="text-base sm:text-lg lg:text-2xl font-bold text-blue-400">Rp 495K</span>
-                            <div class="flex items-center gap-1 text-yellow-400 text-[10px] sm:text-xs">
-                                <i class="fas fa-star"></i>
-                                <span class="font-semibold">4.7</span>
-                            </div>
-                        </div>
-                        <button class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 py-2 lg:py-3 rounded-lg lg:rounded-xl font-semibold text-xs sm:text-sm transition-all duration-300 glow-effect">
-                            <i class="fas fa-clock mr-1 lg:mr-2"></i>Pre-Order
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card glass-effect rounded-2xl overflow-hidden group">
-                    <div class="relative overflow-hidden">
-                        <div class="absolute top-3 right-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-3 py-1 rounded-full text-xs font-bold badge-pulse z-10">
-                            PRE-ORDER
-                        </div>
-                        <svg class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" viewBox="0 0 300 300">
-                            <rect width="300" height="300" fill="#dbeafe"/>
-                            <circle cx="150" cy="120" r="50" fill="#fff"/>
-                            <circle cx="140" cy="115" r="10" fill="#1e1b4b"/>
-                            <circle cx="160" cy="115" r="10" fill="#1e1b4b"/>
-                            <ellipse cx="150" cy="80" rx="60" ry="45" fill="#60a5fa"/>
-                            <path d="M 135 135 Q 150 145 165 135" stroke="#60a5fa" stroke-width="3" fill="none"/>
-                            <text x="230" y="240" font-size="35" fill="#3b82f6" opacity="0.6">♥</text>
-                        </svg>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="text-xl font-bold mb-2">Azure Fantasy</h3>
-                        <p class="text-purple-300 text-sm mb-3">160x50cm • Peach Skin • Double-Sided</p>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-blue-400">Rp 495.000</span>
-                            <div class="flex items-center gap-1 text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <span class="font-semibold">4.7</span>
-                            </div>
-                        </div>
-                        <button class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 py-3 rounded-xl font-semibold transition-all duration-300 glow-effect">
-                            <i class="fas fa-clock mr-2"></i>Pre-Order Now
-                        </button>
-                    </div>
-                </div>
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-10 lg:mb-12 gap-4">
+            <div>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Featured Collection
+                </h2>
+                <p class="text-purple-200 text-xs sm:text-sm lg:text-base">
+                    Koleksi Terbaru & Paling Laris
+                </p>
             </div>
         </div>
-    </section>
+
+        <!-- Products -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+
+            <?php foreach ($products as $product): ?>
+                <div class="product-card glass-effect rounded-xl lg:rounded-2xl overflow-hidden group">
+
+                    <!-- Image -->
+                    <div class="relative overflow-hidden">
+                        <div class="absolute top-2 right-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-2 py-1 rounded-full text-[10px] font-bold badge-pulse z-10">
+                            <?= $product['badge'] ?? 'HOT' ?>
+                        </div>
+
+                        <div class="w-full h-40 sm:h-48 lg:h-64 bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <img
+                            src="<?= htmlspecialchars($product['image']) ?>"
+                            alt="<?= htmlspecialchars($product['name']) ?>"
+                            class="w-full h-full object-cover">
+
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-3 sm:p-4 lg:p-5">
+                        <h3 class="text-sm sm:text-base lg:text-xl font-bold mb-1 line-clamp-1">
+                            <?= htmlspecialchars($product['name']) ?>
+                        </h3>
+
+                        <p class="text-purple-300 text-[10px] sm:text-xs mb-2 line-clamp-1">
+                            160x50cm • Premium Material
+                        </p>
+
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-base sm:text-lg lg:text-2xl font-bold text-pink-400">
+                                Rp <?= number_format($product['price'], 0, ',', '.') ?>
+                            </span>
+
+                            <div class="flex items-center gap-1 text-yellow-400 text-[10px] sm:text-xs">
+                                <i class="fas fa-star"></i>
+                                <span class="font-semibold">
+                                    <?= $product['rating'] ?? '4.9' ?>
+                                </span>
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 py-2 rounded-lg font-semibold text-xs transition-all duration-300 glow-effect">
+                            <i class="fas fa-cart-plus mr-1"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+        </div>
+    </div>
+</section>
+
 
     <?php include __DIR__ . '/partials/footer.php'; ?>
 

@@ -2,28 +2,64 @@
 
 class Database
 {
-    protected $pdo;
+    private string $host = 'localhost';
+    private string $user = 'root';
+    private string $pass = '';
+    private string $db   = 'merchansuki';
+
+    private PDO $dbh;
+    private PDOStatement $stmt;
 
     public function __construct()
     {
-        $config = require __DIR__ . '/../config/database.php';
+        $dsn = "mysql:host={$this->host};dbname={$this->db};charset=utf8mb4";
 
         try {
-            $this->pdo = new PDO(
-                "mysql:host={$config['host']};dbname={$config['dbname']};charset=utf8",
-                $config['user'],
-                $config['pass']
-            );
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->dbh = new PDO($dsn, $this->user, $this->pass, [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES   => false,
+            ]);
         } catch (PDOException $e) {
-            die('Database error: ' . $e->getMessage());
+            die('Database connection failed: ' . $e->getMessage());
         }
     }
 
-    public function query($sql, $params = [])
+    /** Prepare SQL */
+    public function query(string $query): void
     {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt;
+        $this->stmt = $this->dbh->prepare($query);
+    }
+
+    /** Bind parameter */
+    public function bind(string $param, mixed $value): void
+    {
+        $this->stmt->bindValue($param, $value);
+    }
+
+    /** Execute statement */
+    public function execute(): bool
+    {
+        return $this->stmt->execute();
+    }
+
+    /** Get all rows */
+    public function resultSet(): array
+    {
+        $this->execute();
+        return $this->stmt->fetchAll();
+    }
+
+    /** Get single row */
+    public function single(): array|false
+    {
+        $this->execute();
+        return $this->stmt->fetch();
+    }
+
+    /** Affected rows */
+    public function rowCount(): int
+    {
+        return $this->stmt->rowCount();
     }
 }

@@ -1,52 +1,31 @@
 <?php
 
+spl_autoload_register(function ($class) {
+    $paths = [
+        __DIR__ . '/',               
+        __DIR__ . '/../controllers/',
+        __DIR__ . '/../models/',
+    ];
+
+    foreach ($paths as $path) {
+        $file = $path . $class . '.php';
+        if (file_exists($file)) {
+            require_once $file;
+            return;
+        }
+    }
+});
+
 class App
 {
-    protected $controller = 'HomeController';
-    protected $method = 'index';
-    protected $params = [];
-
     public function __construct()
     {
-        $url = $this->parseURL();
+        $router = require __DIR__ . '/Routes.php';
 
-        // BASE PATH = /public_html/app
-        $basePath = dirname(__DIR__);
-
-        // Controller
-        if (isset($url[0])) {
-            $controllerName = ucfirst($url[0]) . 'Controller';
-            if (file_exists($basePath . '/controllers/' . $controllerName . '.php')) {
-                $this->controller = $controllerName;
-                unset($url[0]);
-            }
+        if (!$router instanceof Router) {
+            die('Router gagal dimuat');
         }
 
-        require_once $basePath . '/controllers/' . $this->controller . '.php';
-        $this->controller = new $this->controller;
-
-        // Method
-        if (isset($url[1]) && method_exists($this->controller, $url[1])) {
-            $this->method = $url[1];
-            unset($url[1]);
-        }
-
-        // Params
-        if (!empty($url)) {
-            $this->params = array_values($url);
-        }
-
-        call_user_func_array(
-            [$this->controller, $this->method],
-            $this->params
-        );
-    }
-
-    private function parseURL()
-    {
-        if (isset($_GET['url'])) {
-            return explode('/', rtrim($_GET['url'], '/'));
-        }
-        return [];
+        $router->dispatch();
     }
 }

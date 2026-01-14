@@ -2,13 +2,11 @@
 
 class Controller
 {
-    public function view($view, $data = [])
+    protected function view($view, $data = [])
     {
         extract($data);
 
-        // support folder/view (home/index)
         $view = str_replace('.', '/', $view);
-
         $viewPath = dirname(__DIR__) . '/views/' . $view . '.php';
 
         if (!file_exists($viewPath)) {
@@ -17,4 +15,24 @@ class Controller
 
         require $viewPath;
     }
+
+    protected function model($model)
+    {
+        $modelPath = dirname(__DIR__) . '/models/' . $model . '.php';
+
+        if (!file_exists($modelPath)) {
+            die("Model tidak ditemukan: " . $modelPath);
+        }
+
+        require_once $modelPath;
+        return new $model;
+    }
+    protected function auth()
+{
+    if (!isset($_SESSION['user'])) {
+        header('Location: /login');
+        exit;
+    }
+}
+
 }

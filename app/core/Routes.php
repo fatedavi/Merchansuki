@@ -34,4 +34,26 @@ $router->post('auth/forgot-password', 'AuthController@sendResetLink');
 $router->get('reset-password/{token}', 'AuthController@resetPassword');
 $router->post('reset-password', 'AuthController@updatePassword');
 
+$router->post('/admin/variants/store', 'ProductVariantController@store');
+$router->post('/admin/variants/update/{id}', 'ProductVariantController@update');
+$router->get('/admin/variants/delete/{id}', 'ProductVariantController@delete');
+
+$router->get('/admin/products/{id}/variants', 'ProductController@variants');
+$router->post('admin/products/variants/delete/{id}', 'ProductController@deleteVariant');
+
+$router->get('/admin/variant-wholesale', 'ProductWholesaleController@index');
+$router->post('/admin/wholesale-prices', 'ProductWholesaleController@store');
+$router->get('/product_wholesale/delete/{variant_id}', 'ProductWholesaleController@delete');
+$router->post('/product_wholesale/update', 'ProductWholesaleController@update');
+
+$router->post('admin/categories/store', 'CategoryController@store');
+$router->get('admin/categories/all', 'CategoryController@all'); // untuk fetch JSON
+$router->post('admin/categories/delete/(\d+)', 'CategoryController@delete');
+
+
+
+
+
+
+
 return $router; // 🔥 WAJIB

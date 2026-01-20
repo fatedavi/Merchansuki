@@ -1,120 +1,103 @@
-<!-- Navbar Partial -->
-<nav class="sticky top-0 z-50 bg-indigo-950/95 backdrop-blur-lg shadow-lg border-b border-purple-500/30">
+<nav class="sticky top-0 z-50 bg-blue-600 shadow-lg">
     <div class="container mx-auto px-4">
         <div class="flex items-center justify-between py-3 lg:py-4">
-            <!-- Logo -->
             <a href="#" class="flex items-center space-x-2 lg:space-x-3 group">
-                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center glow-effect">
-                    <i class="fas fa-heart text-white text-lg lg:text-xl"></i>
+                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full flex items-center justify-center">
+                    <i class="fas fa-heart text-blue-600 text-lg lg:text-xl"></i>
                 </div>
-                <span class="text-xl lg:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <span class="text-xl lg:text-2xl font-bold text-white">
                     Merchansuki
                 </span>
             </a>
 
-            <!-- Desktop Menu -->
             <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
-                <a href="#" class="text-purple-200 hover:text-white transition-colors duration-300 font-medium text-sm xl:text-base">Home</a>
-                <div class="relative group">
-                    <button class="text-purple-200 hover:text-white transition-colors duration-300 font-medium flex items-center text-sm xl:text-base">
-                        Dakimakura <i class="fas fa-chevron-down ml-2 text-xs"></i>
-                    </button>
-                </div>
-                <a href="#" class="text-purple-200 hover:text-white transition-colors duration-300 font-medium text-sm xl:text-base">Custom Print</a>
-                <a href="#" class="text-purple-200 hover:text-white transition-colors duration-300 font-medium text-sm xl:text-base">Fan Art Merch</a>
-                <a href="#" class="text-purple-200 hover:text-white transition-colors duration-300 font-medium text-sm xl:text-base">About</a>
-          <?php if (
-                isset($_SESSION['user']) &&
-                $_SESSION['user']['role'] === 'admin'
-            ): ?>
-                <a href="/admin/dashboard"
-                class="text-pink-400 hover:text-white font-bold transition-colors duration-300 text-sm xl:text-base">
-                    Dashboard Admin
-                </a>
-            <?php endif; ?>
-
+                <a href="#" class="text-blue-50 hover:text-white transition-colors duration-300 font-medium text-sm xl:text-base">Home</a>
+                <a href="#" class="text-blue-50 hover:text-white transition-colors duration-300 font-medium text-sm xl:text-base">Dakimakura</a>
+                <a href="#" class="text-blue-50 hover:text-white transition-colors duration-300 font-medium text-sm xl:text-base">Custom Print</a>
+                <a href="#" class="text-blue-50 hover:text-white transition-colors duration-300 font-medium text-sm xl:text-base">Fan Art Merch</a>
+                <a href="#" class="text-blue-50 hover:text-white transition-colors duration-300 font-medium text-sm xl:text-base">About</a>
+                
+                <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+                    <a href="/admin/dashboard"
+                    class="bg-white/20 text-white px-3 py-1 rounded font-bold transition-colors duration-300 text-sm">
+                        Dashboard Admin
+                    </a>
+                <?php endif; ?>
             </div>
 
-            <!-- Right Menu -->
-<div class="flex items-center space-x-3 lg:space-x-4">
+            <div class="flex items-center space-x-3 lg:space-x-4">
+                <button class="hidden md:block text-blue-100 hover:text-white transition-colors">
+                    <i class="fas fa-search text-base lg:text-lg"></i>
+                </button>
 
-    <!-- Search -->
-    <button class="hidden md:block text-purple-200 hover:text-white transition-colors">
-        <i class="fas fa-search text-base lg:text-lg"></i>
-    </button>
+                <button class="relative text-blue-100 hover:text-white transition-colors">
+                    <i class="fas fa-shopping-cart text-base lg:text-lg"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full
+                                 w-4 h-4 lg:w-5 lg:h-5 flex items-center justify-center font-bold">
+                        0
+                    </span>
+                </button>
+                
 
-    <!-- Cart -->
-    <button class="relative text-purple-200 hover:text-white transition-colors">
-        <i class="fas fa-shopping-cart text-base lg:text-lg"></i>
-        <span
-            class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full
-                   w-4 h-4 lg:w-5 lg:h-5 flex items-center justify-center font-bold
-                   text-[10px] lg:text-xs">
-            0
-        </span>
-    </button>
-
-<?php if (isset($_SESSION['user']) && is_array($_SESSION['user'])): ?>
-    <!-- ✅ USER LOGGED IN -->
+       <?php if (isset($_SESSION['user']) && is_array($_SESSION['user'])): ?>
     <div class="relative group hidden md:block">
         <button
-            class="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600
-                   px-4 py-2 rounded-full font-semibold text-white
-                   hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+            class="flex items-center space-x-2 bg-orange-500 px-4 py-2 rounded-lg font-semibold text-white
+                    hover:bg-orange-600 transition-all duration-300 shadow-sm">
             <i class="fas fa-user"></i>
             <span><?= htmlspecialchars($_SESSION['user']['name']) ?></span>
-            <i class="fas fa-chevron-down text-xs"></i>
+            <i class="fas fa-chevron-down text-xs ml-1"></i>
         </button>
 
-        <!-- Dropdown -->
         <div
-            class="absolute right-0 mt-2 w-40 bg-purple-900 rounded-lg shadow-lg
-                   opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100
-                   transition-all duration-200 z-50">
+            class="absolute right-0 mt-2 w-40 bg-white border border-gray-100 rounded-lg shadow-xl
+                    opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100
+                    transition-all duration-200 z-50 invisible group-hover:visible">
 
             <a href="/profile"
-               class="block px-4 py-2 text-sm text-purple-200 hover:bg-purple-700 rounded-t-lg">
-                Profile
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-t-lg transition-colors">
+                <i class="fas fa-id-card mr-2 opacity-70"></i> Profile
             </a>
 
             <a href="/auth/logout"
-               class="block px-4 py-2 text-sm text-red-400 hover:bg-purple-700 rounded-b-lg">
-                Logout
+                class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-b-lg transition-colors">
+                <i class="fas fa-sign-out-alt mr-2 opacity-70"></i> Logout
             </a>
         </div>
     </div>
 
 <?php else: ?>
-    <!-- ❌ GUEST -->
     <a href="/auth/login"
-       class="hidden md:block bg-gradient-to-r from-purple-600 to-pink-600
-              hover:from-purple-700 hover:to-pink-700
-              px-4 lg:px-6 py-2 rounded-full font-semibold
-              text-sm lg:text-base transition-all duration-300 glow-effect">
+        class="hidden md:block bg-orange-500 hover:bg-orange-600 px-4 lg:px-6 py-2 rounded-lg font-semibold text-white
+                text-sm lg:text-base transition-all duration-300 shadow-md text-center">
         Login
     </a>
 <?php endif; ?>
 
-
-    <!-- Mobile Menu -->
-    <button class="lg:hidden text-white" id="mobile-menu-btn">
-        <i class="fas fa-bars text-xl"></i>
-    </button>
-</div>
-
+                <button class="lg:hidden text-white" id="mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div class="lg:hidden hidden pb-4" id="mobile-menu">
-            <div class="flex flex-col space-y-3">
-                <a href="#" class="text-purple-200 hover:text-white transition-colors py-2 text-sm">Home</a>
-                <a href="#" class="text-purple-200 hover:text-white transition-colors py-2 text-sm">Dakimakura</a>
-                <a href="#" class="text-purple-200 hover:text-white transition-colors py-2 text-sm">Custom Print</a>
-                <a href="#" class="text-purple-200 hover:text-white transition-colors py-2 text-sm">Fan Art Merch</a>
-                <a href="#" class="text-purple-200 hover:text-white transition-colors py-2 text-sm">About</a>
-                <a href="/login" class="md:hidden bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 px-6 py-2 rounded-full font-semibold text-sm transition-all duration-300 text-center block">
-                    Login
-                </a>
+        <div class="lg:hidden hidden pb-6 border-t border-blue-500 mt-2" id="mobile-menu">
+            <div class="flex flex-col space-y-4 pt-4">
+                <a href="#" class="text-blue-50 hover:text-white transition-colors py-1 text-sm font-medium">Home</a>
+                <a href="#" class="text-blue-50 hover:text-white transition-colors py-1 text-sm font-medium">Dakimakura</a>
+                <a href="#" class="text-blue-50 hover:text-white transition-colors py-1 text-sm font-medium">Custom Print</a>
+                <a href="#" class="text-blue-50 hover:text-white transition-colors py-1 text-sm font-medium">Fan Art Merch</a>
+                <a href="#" class="text-blue-50 hover:text-white transition-colors py-1 text-sm font-medium">About</a>
+                
+                <?php if (isset($_SESSION['user'])): ?>
+                    <div class="py-2 border-t border-blue-500/50">
+                        <p class="text-white font-bold mb-2">Halo, <?= htmlspecialchars($_SESSION['user']['name']) ?></p>
+                        <a href="/auth/logout" class="text-red-300 text-sm font-bold">Logout</a>
+                    </div>
+                <?php else: ?>
+                    <a href="/auth/login" class="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-lg font-semibold text-sm text-white text-center block shadow-md transition-all">
+                        Login
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </div>

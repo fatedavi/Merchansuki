@@ -1,10 +1,35 @@
 <?php
 class ProductController extends Controller {
-    public function index() {
-        $productModel = $this->model('Product');
-        $products = $productModel->getAll();
-        $this->view('product.index', ['products' => $products]);
+
+public function index() {
+    $productModel = $this->model('Product');
+    $categoryModel = $this->model('Category');
+
+    // DATA LAMA (JANGAN DIUBAH)
+    $products = $productModel->getAllWithVariants();
+
+    // DATA TAMBAHAN
+    $productsWithCategory = $productModel->getAllWithCategory();
+    $categories = $categoryModel->getAll();
+
+    // 🔥 INJECT category_name ke $products
+    $categoryMap = [];
+    foreach ($productsWithCategory as $pwc) {
+        $categoryMap[$pwc['id']] = $pwc['category_name'];
     }
+
+    foreach ($products as &$product) {
+        $product['category_name'] = $categoryMap[$product['id']] ?? '-';
+    }
+    unset($product); // safety reference
+
+    $this->view('product.index', [
+        'products' => $products,
+        'categories' => $categories
+    ]);
+}
+
+
 
     public function detail($id){
         $productModel = $this->model('Product');
@@ -20,122 +45,124 @@ class ProductController extends Controller {
         $this->view('product.create');
     }
 
-   public function store()
+public function store()
 {
+    header('Content-Type: application/json');
+
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header('Location: /admin/products');
+        echo json_encode([
+            'success' => false,
+            'message' => 'Method not allowed'
+        ]);
+        exit;
+    }
+
+    // VALIDASI MINIMAL
+    if (empty($_POST['name']) || empty($_POST['category_id'])) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Nama produk & kategori wajib diisi'
+        ]);
         exit;
     }
 
     $data = [
-        'category_id' => $_POST['category_id'] ?? null,
-        'name'        => trim($_POST['name'] ?? ''),
-        'slug'        => trim($_POST['slug'] ?? ''),
+        'category_id' => (int) $_POST['category_id'],
+        'name'        => trim($_POST['name']),
         'description' => trim($_POST['description'] ?? ''),
-        'price'       => (float) ($_POST['price'] ?? 0),
-        'stock'       => (int) ($_POST['stock'] ?? 0),
-        'rating'      => (float) ($_POST['rating'] ?? 0),
         'highlight'   => isset($_POST['highlight']) ? 1 : 0,
-        'status'      => $_POST['status'] ?? 'active',
-        'image'       => null
+        'status'      => $_POST['status'] ?? 'active'
     ];
 
-    /**
-     * =============================
-     * UPLOAD IMAGE
-     * =============================
-     */
-    if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    try {
+        $productModel = $this->model('Product');
 
-        $allowedExt = ['jpg', 'jpeg', 'png', 'webp'];
-        $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+        // SIMPAN PRODUCT
+        $productId = $productModel->create($data);
 
-        if (!in_array($ext, $allowedExt)) {
-            $_SESSION['error'] = 'Format gambar tidak valid.';
-            header('Location: /admin/products/create');
-            exit;
-        }
-
-        if ($_FILES['image']['size'] > 2 * 1024 * 1024) { // 2MB
-            $_SESSION['error'] = 'Ukuran gambar maksimal 2MB.';
-            header('Location: /admin/products/create');
-            exit;
-        }
-
-        $targetDir = __DIR__ . '/../../public/assets/images/';
-        if (!is_dir($targetDir)) {
-            mkdir($targetDir, 0777, true);
-        }
-
-        $filename = time() . '_' . uniqid() . '.' . $ext;
-        $target   = $targetDir . $filename;
-
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            // SIMPAN KE DATABASE: NAMA FILE SAJA
-            $data['image'] = $filename;
-        }
+        echo json_encode([
+            'success' => true,
+            'message' => 'Produk berhasil ditambahkan',
+            'product_id' => $productId
+        ]);
+    } catch (Exception $e) {
+        echo json_encode([
+            'success' => false,
+            'message' => $e->getMessage()
+        ]);
     }
 
-    /**
-     * =============================
-     * SAVE DATA
-     * =============================
-     */
-    $productModel = $this->model('Product');
-    $productModel->create($data);
-
-    $_SESSION['success'] = 'Produk berhasil ditambahkan';
-    header('Location: /admin/products');
     exit;
 }
 
 
-    public function edit($id) {
-        $productModel = $this->model('Product');
-        $product = $productModel->findById($id);
-        if (!$product) {
-            $this->view('errors.404');
-            return;
-        }
-        $this->view('product.edit', ['product' => $product]);
-    }
-
     public function update($id) {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'category_id' => $_POST['category_id'] ?? null,
-                'name' => $_POST['name'] ?? '',
-                'slug' => $_POST['slug'] ?? null,
-                'description' => $_POST['description'] ?? '',
-                'price' => $_POST['price'] ?? 0,
-                'stock' => $_POST['stock'] ?? 0,
-                'rating' => $_POST['rating'] ?? 0.0,
-                'highlight' => isset($_POST['highlight']) ? 1 : 0,
-                'status' => $_POST['status'] ?? 'active',
-            ];
-            // Proses upload gambar
-            if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-                $targetDir = 'public/assets/images/';
-                if (!is_dir($targetDir)) {
-                    mkdir($targetDir, 0777, true);
-                }
-                $filename = time() . '_' . basename($_FILES['image']['name']);
-                $target = $targetDir . $filename;
-                if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-                    $data['image'] = '/' . $target;
-                }
-            }
-            $productModel = $this->model('Product');
-            $productModel->update($id, $data);
-            header('Location: /admin/products');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(['success' => false, 'message' => 'Method not allowed']);
             exit;
         }
-    }
 
+        header('Content-Type: application/json');
+
+        $data = [
+            'category_id' => $_POST['category_id'] ?? null,
+            'name'        => trim($_POST['name'] ?? ''),
+            'slug'        => trim($_POST['slug'] ?? ''),
+            'description' => trim($_POST['description'] ?? ''),
+            'price'       => (float) ($_POST['price'] ?? 0),
+            'stock'       => (int) ($_POST['stock'] ?? 0),
+            'rating'      => (float) ($_POST['rating'] ?? 0),
+            'highlight'   => isset($_POST['highlight']) ? 1 : 0,
+            'status'      => $_POST['status'] ?? 'active',
+        ];
+
+        try {
+            $productModel = $this->model('Product');
+            $productModel->update($id, $data);
+            
+            echo json_encode(['success' => true, 'message' => 'Produk berhasil diupdate']);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+        exit;
+    }
     public function delete($id) {
         $productModel = $this->model('Product');
         $productModel->delete($id);
         header('Location: /admin/products');
         exit;
     }
+public function variants($productId)
+{
+    header('Content-Type: application/json');
+
+    $productModel = $this->model('Product');
+    echo json_encode(
+        $productModel->getVariants($productId)
+    );
+}
+public function deleteVariant($id)
+{
+    header('Content-Type: application/json');
+
+    try {
+        $variantModel = $this->model('ProductVariant');
+        $variantModel->delete($id);
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Variant berhasil dihapus'
+        ]);
+    } catch (Exception $e) {
+        echo json_encode([
+            'success' => false,
+            'message' => $e->getMessage()
+        ]);
+    }
+    exit;
+}
+
+
+
+
 }
